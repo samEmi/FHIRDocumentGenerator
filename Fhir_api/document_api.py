@@ -6,6 +6,9 @@ from math import floor
 app = Flask(__name__)
 api = Api(app)
 
+fhir_parser = FHIR()
+patients = fhir_parser.get_all_patients()
+
 class FHIRInfo(Resource):
     def __init__(self):
         super(FHIRInfo, self).__init__()
@@ -14,15 +17,13 @@ class FHIRInfo(Resource):
         self.reqParser.add_argument("graph", type=str)
 
     def get(self):
-        fhir_parser = FHIR()
         arguments = self.reqParser.parse_args()
         if arguments["graph"]:
-            return self.getAgeToObservations(fhir_parser)
-        return self.getPatientResult(arguments, fhir_parser)
+            return self.getAgeToObservations()
+        return self.getPatientResult(arguments)
 
-    def getAgeToObservations(self, fhir_parser):
+    def getAgeToObservations(self):
         result = {"Never Married": dict(), "Married": dict(), "English": dict()}
-        patients = fhir_parser.get_all_patients()
         for patient in patients:
             status = str(patient.marital_status)
             age = floor(patient.age())
@@ -41,7 +42,7 @@ class FHIRInfo(Resource):
             ageFrequencyDict[age] = 1
 
 
-    def getPatientResult(self, arguments, fhir_parser):
+    def getPatientResult(self, arguments):
         patient = fhir_parser.get_patient(arguments["id"])
         observations = fhir_parser.get_patient_observations(arguments["id"])
         observations = self.assessObservations(observations)
