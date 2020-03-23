@@ -1,6 +1,5 @@
-
 from flask import Flask
-from flask_restful import  Api, Resource, reqparse
+from flask_restful import Api, Resource, reqparse
 from fhir_parser.fhir import FHIR
 from math import floor
 app = Flask(__name__)
@@ -41,7 +40,6 @@ class FHIRInfo(Resource):
         else:
             ageFrequencyDict[age] = 1
 
-
     def getPatientResult(self, arguments):
         patient = fhir_parser.get_patient(arguments["id"])
         observations = fhir_parser.get_patient_observations(arguments["id"])
@@ -66,5 +64,5 @@ class FHIRInfo(Resource):
 
 api.add_resource(FHIRInfo, "/api/patients", endpoint="document")
 
-if __name__== "__main__":
+if __name__ == "__main__":
     app.run(debug=True, port=5002)

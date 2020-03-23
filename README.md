@@ -2,19 +2,22 @@
 Generates Patient Health Records after accessing GOSH DRIVE’s FHIR server.
 
 # Deployment
-1) Create a virtual environment in the same folder as the requirements.txt file and
+1) Follow the readme file at 
+https://github.com/goshdrive/FHIRworks_2020
+
+2) Create a virtual environment in the same folder as the requirements.txt file and
  activate the environment. Please see here for information on creating a 
  virtual environment: https://docs.python.org/3/tutorial/venv.html . 
  The virtual environment is desirable but not essential.
  
-2) Run ‘pip install -r requirements.txt’ on terminal/cmd. This should install all packages required
+3) Run ‘pip install -r requirements.txt’ on terminal/cmd. This should install all packages required
    for this project
 
-3) Run document_api.py to host the api on localhost
+4) Run document_api.py to host the api on localhost
 
-4) Leave this running
+5) Leave this running
 
-5) Run the Controller.py file.
+6) Run the Controller.py file.
 
 # Solution
 1) The Fhir_api/document_api.py is the RESTful api i've created to 
